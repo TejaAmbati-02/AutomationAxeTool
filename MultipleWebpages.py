@@ -15,7 +15,7 @@ wb = xlrd.open_workbook(loc)
 sheet = wb.sheet_by_index(0)
 
 lis = []
-for i in range(0, 10):
+for i in range(0, 2):
 	a = sheet.cell_value(i, 0)
 	lis.append(a)
 
@@ -29,12 +29,13 @@ def test_google():
 		axe.write_results(results, f'axeIntegration{count}{i[12:16]}.json')
 		count+=1
 
-	driver.close()
-
 	for f in files:
 		if f.startswith("axeIntegration"):
 			shutil.move(f, "TestFolder")
+	driver.close()
 
 	assert len(results["violations"]) == 0, axe.report(results["violations"])
+
+
 
 test_google()
